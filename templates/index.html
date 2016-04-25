@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+    
+    {% block content %}
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>Welcome to the home page</h1>
+    <p>You can navigate to different control modules from here.</p>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class = "col-lg-4">
+      <h2>Startup sequence</h2>
+      <p>Go through the calibration sequence. Do this if this is the first time you've turned the drone on.</p>
+      <p><a class="btn btn-primary" href="startup" role="button">Go >></a></p>
+    </div>
+    <div class = "col-lg-4">
+      <h2>Free flight</h2>
+      <p>Go here if the drone has been calibrated and is ready to fly.</p>
+      <p><a class="btn btn-primary" href="#" role="button">Go >></a></p>
+    </div>
+    <div class = "col-lg-4">
+      <h2>Preprogrammed routines</h2>
+      <p>Run automated flight routines.</p>
+      <p><a class="btn btn-primary" href="#" role="button">Go >></a></p>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

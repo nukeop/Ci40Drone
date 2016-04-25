@@ -1,0 +1,74 @@
+-{% extends "layout.html" %}
+
+    {% block content %}
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>Drone startup</h1>
+    <p>Start the drone and calibrate its motors from here.</p>
+  </div>
+</div>
+
+<div class="container">
+
+  {% if connected %}
+
+  <form class="form-inline">
+    <div class="form-group">
+      <label>Ports:</label>
+      <input type="number" class="form-control" id="port1" value="{{ session.port1 }}" disabled>
+      <input type="number" class="form-control" id="port2" value="{{ session.port2 }}" disabled>
+      <input type="number" class="form-control" id="port3" value="{{ session.port3 }}" disabled>
+      <input type="number" class="form-control" id="port4" value="{{ session.port4 }}" disabled>	
+    </div>
+  </form>
+
+  <br>
+  <div class="btn-group">
+    <a class="btn btn-danger" href="?command=kill">Kill</a>
+    <a class="btn btn-primary" href="?command=increase">Increase throttle</a>
+    <a class="btn btn-primary" href="?command=decrease">Decrease throttle</a>
+  </div>
+  <br>
+  <br>
+  <form class="form-inline">
+    <div class="form-group">
+      <input type="submit" class="btn btn-primary" >Set throttle</input>
+      <input type="hidden" name="command" value="set">
+      <input type="number" class="form-control" name="amount" id="amount">
+    </div>
+  </form>
+    
+  {% else %}
+  <form class="form-inline" action="{{ url_for('startup') }}"  method="POST">
+    <div class="form-group">
+      <label>Ports:</label>
+	<input type="number" class="form-control" value="9001" id="port1" name="port1">
+	<input type="number" class="form-control" value="9002" id="port2" name="port2">
+	<input type="number" class="form-control" value="9003" id="port3" name="port3">
+	<input type="number" class="form-control" value="9004" id="port4" name="port4">	
+    </div>
+    <button type="submit" class="btn btn-primary">Connect</button>
+  </form>
+  {% endif %}
+  
+  <!-- program output -->
+  {% if droneoutput %}
+  <br>
+  <div class="well" style="height: 250px; overflow:auto">
+    {% for line in droneoutput %}
+    <samp>{{ line }}</samp></br>
+    {% endfor %}
+  </div>
+  {% else %}
+  </br>
+  There is nothing here yet. When you start the drone, program output will appear here.
+  {% endif %}
+
+
+
+</div>
+
+    {% endblock %}
+   
+ 
